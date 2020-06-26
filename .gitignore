@@ -1,0 +1,7 @@
+# default ignored files
+.idea
+# Jupyter Notebooks
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+# CSV files
+*.csv
