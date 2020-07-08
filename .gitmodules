@@ -1,0 +1,4 @@
+[submodule "OpenNE"]
+	path = OpenNE
+	url = https://github.com/thunlp/OpenNE
+	branch = master
