@@ -1,11 +1,11 @@
+from constants import SEED
 import csv
 from gensim.models import Word2Vec
-from albums.constants import SEED
 import numpy as np
 import pandas as pd
-from sklearn.linear_model import LogisticRegressionCV
+from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import cross_val_predict
 import stellargraph as sg
 from stellargraph.data import BiasedRandomWalk
 import time
@@ -37,19 +37,18 @@ for window_size in [5, 10, 15]:
         albums_embeddings = albums_embeddings[albums_embeddings['URL'].isin(albums['URL'].tolist())]
         albums = albums.merge(albums_embeddings, left_on='URL', right_on='URL')
 
-        albums.to_csv(f'albums_embeddings_node2vec_DFS_{window_size}_{length}.csv', index_label='id',
+        albums.to_csv(f'./embeddings/albums_embeddings_node2vec_DFS_{length}_{window_size}.csv', index_label='id',
                       quoting=csv.QUOTE_ALL)
 
         albums_labels = {label: index for index, label in enumerate(albums.label.unique())}
         albums_colours = albums.label.map(albums_labels)
 
-        X_train, X_test, y_train, y_test = train_test_split(np.array(albums.embedding.tolist()),
-                                                            albums_colours.to_numpy(), train_size=0.75,
-                                                            random_state=SEED)
-        logistic_classifier = LogisticRegressionCV(cv=10, scoring='accuracy', multi_class='ovr', max_iter=300,
-                                                   random_state=SEED)
-        logistic_classifier.fit(X_train, y_train)
+        X = np.array(albums.embedding.tolist())
+        y = albums_colours.to_numpy()
 
-        y_pred = logistic_classifier.predict(X_test)
+        logistic_classifier = LogisticRegression(multi_class='ovr', random_state=SEED)
+        predicted = cross_val_predict(logistic_classifier, X, y, cv=10)
+        accuracy = accuracy_score(y, predicted)
+
         print(
-            f'window size: {window_size}, length: {length}, accuracy: {accuracy_score(y_test, y_pred)}, time: {end_time - start_time}')
+            f'window size: {window_size}, length: {length}, accuracy: {accuracy}, time: {end_time - start_time}')

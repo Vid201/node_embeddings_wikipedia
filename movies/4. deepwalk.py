@@ -1,11 +1,11 @@
+from constants import SEED
 import csv
 from gensim.models import Word2Vec
-from movies.constants import SEED
 import numpy as np
 import pandas as pd
-from sklearn.linear_model import LogisticRegressionCV
+from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import cross_val_predict
 import stellargraph as sg
 from stellargraph.data import UniformRandomWalk
 import time
@@ -37,18 +37,18 @@ for window_size in [5, 10, 15]:
         movies_embeddings = movies_embeddings[movies_embeddings['URL'].isin(movies['URL'].tolist())]
         movies = movies.merge(movies_embeddings, left_on='URL', right_on='URL')
 
-        movies.to_csv(f'movies_embeddings_deepwalk_{window_size}_{length}.csv', index_label='id', quoting=csv.QUOTE_ALL)
+        movies.to_csv(f'./embeddings/movies_embeddings_deepwalk_{length}_{window_size}.csv', index_label='id',
+                      quoting=csv.QUOTE_ALL)
 
         movies_labels = {label: index for index, label in enumerate(movies.label.unique())}
         movies_colours = movies.label.map(movies_labels)
 
-        X_train, X_test, y_train, y_test = train_test_split(np.array(movies.embedding.tolist()),
-                                                            movies_colours.to_numpy(), train_size=0.75,
-                                                            random_state=SEED)
-        logistic_classifier = LogisticRegressionCV(cv=10, scoring='accuracy', multi_class='ovr', max_iter=300,
-                                                   random_state=SEED)
-        logistic_classifier.fit(X_train, y_train)
+        X = np.array(movies.embedding.tolist())
+        y = movies_colours.to_numpy()
 
-        y_pred = logistic_classifier.predict(X_test)
+        logistic_classifier = LogisticRegression(multi_class='ovr', random_state=SEED)
+        predicted = cross_val_predict(logistic_classifier, X, y, cv=10)
+        accuracy = accuracy_score(y, predicted)
+
         print(
-            f'window size: {window_size}, length: {length}, accuracy: {accuracy_score(y_test, y_pred)}, time: {end_time - start_time}')
+            f'window size: {window_size}, length: {length}, accuracy: {accuracy}, time: {end_time - start_time}')
