@@ -3,7 +3,3 @@
 # Jupyter Notebooks
 .ipynb_checkpoints
 */.ipynb_checkpoints/*
-# CSV files
-*.csv
-# GEXF files
-*.gexf
