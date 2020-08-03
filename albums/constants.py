@@ -5,7 +5,7 @@ DIGITALDREAMDOOR_ENDPOINTS = ['best_country/best_countryalbums.html', 'best_rap-
 
 # learning
 
-SEED = 17
+SEEDS = [5, 17, 30, 100, 250]
 
 # classification
 

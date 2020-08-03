@@ -5,7 +5,7 @@ THENUMBERS_ENDPOINTS = ['creative-types/super-hero', 'creative-types/kids-fictio
 
 # learning
 
-SEED = 17
+SEEDS = [5, 17, 30, 100, 250]
 
 # classification
 
