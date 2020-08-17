@@ -13076,10 +13076,11 @@ div#notebook {
 
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">csv</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
 <span class="kn">from</span> <span class="nn">constants</span> <span class="kn">import</span> <span class="n">SEEDS</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -13118,7 +13119,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">SEED</span> <span class="o">=</span> <span class="n">SEEDS</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
@@ -13141,7 +13142,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">SEED</span><span class="p">)</span>
@@ -13155,7 +13156,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">principal_components</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">principal_components</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
@@ -13195,7 +13196,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">movies_labels</span> <span class="o">=</span> <span class="p">{</span><span class="n">label</span><span class="p">:</span><span class="n">index</span> <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">movies</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">unique</span><span class="p">())}</span>
@@ -13241,7 +13242,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">cos_similarity</span> <span class="o">=</span> <span class="n">cosine_similarity</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">movies</span><span class="o">.</span><span class="n">embedding</span><span class="o">.</span><span class="n">tolist</span><span class="p">()),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">movies</span><span class="o">.</span><span class="n">embedding</span><span class="o">.</span><span class="n">tolist</span><span class="p">()))</span>
@@ -13254,7 +13255,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">movies_index</span> <span class="o">=</span> <span class="mi">50</span>
@@ -13302,27 +13303,38 @@ X-Men: Apocalypse 0.8775105
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">movies</span><span class="o">.</span><span class="n">embedding</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">movies_colours</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">classification_result</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;accuracy&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+<span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">movies</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">unique</span><span class="p">():</span>
+    <span class="n">classification_result</span><span class="p">[</span><span class="n">label</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
 
-<span class="n">logistic_classifier</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">multi_class</span><span class="o">=</span><span class="s1">&#39;ovr&#39;</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">SEED</span><span class="p">)</span>
-<span class="n">predicted</span> <span class="o">=</span> <span class="n">cross_val_predict</span><span class="p">(</span><span class="n">logistic_classifier</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-</pre></div>
+<span class="k">for</span> <span class="n">SEED</span> <span class="ow">in</span> <span class="n">SEEDS</span><span class="p">:</span>
+    <span class="n">movies</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./embeddings/movies_embeddings_sdne_[128]_150_</span><span class="si">{</span><span class="n">SEED</span><span class="si">}</span><span class="s1">.csv&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="n">quoting</span><span class="o">=</span><span class="n">csv</span><span class="o">.</span><span class="n">QUOTE_ALL</span><span class="p">)</span>
+    <span class="n">movies</span><span class="o">.</span><span class="n">embedding</span> <span class="o">=</span> <span class="n">movies</span><span class="o">.</span><span class="n">embedding</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">embedding</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="n">embedding</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">))</span>
+    
+    <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">movies</span><span class="o">.</span><span class="n">embedding</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">movies_colours</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+    
+    <span class="n">logistic_classifier</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">multi_class</span><span class="o">=</span><span class="s1">&#39;ovr&#39;</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">SEED</span><span class="p">)</span>
+    <span class="n">predicted</span> <span class="o">=</span> <span class="n">cross_val_predict</span><span class="p">(</span><span class="n">logistic_classifier</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    
+    <span class="n">class_report</span> <span class="o">=</span> <span class="n">classification_report</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">predicted</span><span class="p">,</span> <span class="n">target_names</span><span class="o">=</span><span class="n">movies</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">unique</span><span class="p">(),</span> <span class="n">output_dict</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">classification_result</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">class_report</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">]</span>
+    
+    <span class="k">if</span> <span class="n">SEED</span> <span class="ow">is</span> <span class="n">SEEDS</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+        <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">movies</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">unique</span><span class="p">():</span>
+            <span class="n">classification_result</span><span class="p">[</span><span class="n">label</span><span class="p">]</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">class_report</span><span class="p">[</span><span class="n">label</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">movies</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">unique</span><span class="p">():</span>
+            <span class="n">classification_result</span><span class="p">[</span><span class="n">label</span><span class="p">]</span> <span class="o">+=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">class_report</span><span class="p">[</span><span class="n">label</span><span class="p">])</span>
 
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[22]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">predicted</span><span class="p">,</span> <span class="n">target_names</span><span class="o">=</span><span class="n">movies</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">unique</span><span class="p">()))</span>
+<span class="n">classification_result</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">]</span> <span class="o">/=</span> <span class="nb">len</span><span class="p">(</span><span class="n">SEEDS</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">movies</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">unique</span><span class="p">():</span>
+    <span class="n">classification_result</span><span class="p">[</span><span class="n">label</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span> <span class="p">:</span> <span class="n">val</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">SEEDS</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">classification_result</span><span class="p">[</span><span class="n">label</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+    
+<span class="nb">print</span><span class="p">(</span><span class="n">classification_result</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13339,18 +13351,7 @@ X-Men: Apocalypse 0.8775105
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>              precision    recall  f1-score   support
-
-  super-hero       0.98      0.95      0.96       100
-kids-fiction       0.88      0.82      0.85       100
-      horror       0.82      0.92      0.87       100
-     musical       0.82      0.87      0.84        93
-     fantasy       0.79      0.72      0.75        92
-
-    accuracy                           0.86       485
-   macro avg       0.86      0.86      0.86       485
-weighted avg       0.86      0.86      0.86       485
-
+<pre>{&#39;accuracy&#39;: 0.8544329896907217, &#39;super-hero&#39;: {&#39;precision&#39;: 0.9834192439862542, &#39;recall&#39;: 0.9480000000000001, &#39;f1-score&#39;: 0.9653786387651507, &#39;support&#39;: 100.0}, &#39;kids-fiction&#39;: {&#39;precision&#39;: 0.8473889181183962, &#39;recall&#39;: 0.808, &#39;f1-score&#39;: 0.8270916388178886, &#39;support&#39;: 100.0}, &#39;horror&#39;: {&#39;precision&#39;: 0.8290398922206702, &#39;recall&#39;: 0.93, &#39;f1-score&#39;: 0.8765505135510014, &#39;support&#39;: 100.0}, &#39;musical&#39;: {&#39;precision&#39;: 0.8392876423209747, &#39;recall&#39;: 0.8516129032258064, &#39;f1-score&#39;: 0.8452706607331845, &#39;support&#39;: 93.0}, &#39;fantasy&#39;: {&#39;precision&#39;: 0.7691952178004096, &#39;recall&#39;: 0.7239130434782608, &#39;f1-score&#39;: 0.7457411003145438, &#39;support&#39;: 92.0}}
 </pre>
 </div>
 </div>

@@ -13076,10 +13076,11 @@ div#notebook {
 
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">csv</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
 <span class="kn">from</span> <span class="nn">constants</span> <span class="kn">import</span> <span class="n">SEEDS</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -13118,7 +13119,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">SEED</span> <span class="o">=</span> <span class="n">SEEDS</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
@@ -13141,7 +13142,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">SEED</span><span class="p">)</span>
@@ -13155,7 +13156,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">principal_components</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">principal_components</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
@@ -13195,7 +13196,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">albums_labels</span> <span class="o">=</span> <span class="p">{</span><span class="n">label</span><span class="p">:</span><span class="n">index</span> <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">albums</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">unique</span><span class="p">())}</span>
@@ -13241,7 +13242,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">cos_similarity</span> <span class="o">=</span> <span class="n">cosine_similarity</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">albums</span><span class="o">.</span><span class="n">embedding</span><span class="o">.</span><span class="n">tolist</span><span class="p">()),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">albums</span><span class="o">.</span><span class="n">embedding</span><span class="o">.</span><span class="n">tolist</span><span class="p">()))</span>
@@ -13254,7 +13255,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">albums_index</span> <span class="o">=</span> <span class="mi">295</span>
@@ -13302,27 +13303,38 @@ Screaming for Vengeance 0.48271124711117497
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">albums</span><span class="o">.</span><span class="n">embedding</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">albums_colours</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">classification_result</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;accuracy&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+<span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">albums</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">unique</span><span class="p">():</span>
+    <span class="n">classification_result</span><span class="p">[</span><span class="n">label</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
 
-<span class="n">logistic_classifier</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">multi_class</span><span class="o">=</span><span class="s1">&#39;ovr&#39;</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">SEED</span><span class="p">)</span>
-<span class="n">predicted</span> <span class="o">=</span> <span class="n">cross_val_predict</span><span class="p">(</span><span class="n">logistic_classifier</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-</pre></div>
+<span class="k">for</span> <span class="n">SEED</span> <span class="ow">in</span> <span class="n">SEEDS</span><span class="p">:</span>
+    <span class="n">albums</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./embeddings/albums_embeddings_node2vec_DFS_80_15_</span><span class="si">{</span><span class="n">SEED</span><span class="si">}</span><span class="s1">.csv&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="n">quoting</span><span class="o">=</span><span class="n">csv</span><span class="o">.</span><span class="n">QUOTE_ALL</span><span class="p">)</span>
+    <span class="n">albums</span><span class="o">.</span><span class="n">embedding</span> <span class="o">=</span> <span class="n">albums</span><span class="o">.</span><span class="n">embedding</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">embedding</span><span class="p">:</span> <span class="nb">eval</span><span class="p">(</span><span class="n">embedding</span><span class="p">))</span>
+    
+    <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">albums</span><span class="o">.</span><span class="n">embedding</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">albums_colours</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+    
+    <span class="n">logistic_classifier</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">multi_class</span><span class="o">=</span><span class="s1">&#39;ovr&#39;</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">SEED</span><span class="p">)</span>
+    <span class="n">predicted</span> <span class="o">=</span> <span class="n">cross_val_predict</span><span class="p">(</span><span class="n">logistic_classifier</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    
+    <span class="n">class_report</span> <span class="o">=</span> <span class="n">classification_report</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">predicted</span><span class="p">,</span> <span class="n">target_names</span><span class="o">=</span><span class="n">albums</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">unique</span><span class="p">(),</span> <span class="n">output_dict</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">classification_result</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">class_report</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">]</span>
+    
+    <span class="k">if</span> <span class="n">SEED</span> <span class="ow">is</span> <span class="n">SEEDS</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+        <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">albums</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">unique</span><span class="p">():</span>
+            <span class="n">classification_result</span><span class="p">[</span><span class="n">label</span><span class="p">]</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">class_report</span><span class="p">[</span><span class="n">label</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">albums</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">unique</span><span class="p">():</span>
+            <span class="n">classification_result</span><span class="p">[</span><span class="n">label</span><span class="p">]</span> <span class="o">+=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">class_report</span><span class="p">[</span><span class="n">label</span><span class="p">])</span>
 
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[24]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">predicted</span><span class="p">,</span> <span class="n">target_names</span><span class="o">=</span><span class="n">albums</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">unique</span><span class="p">()))</span>
+<span class="n">classification_result</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">]</span> <span class="o">/=</span> <span class="nb">len</span><span class="p">(</span><span class="n">SEEDS</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">albums</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">unique</span><span class="p">():</span>
+    <span class="n">classification_result</span><span class="p">[</span><span class="n">label</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span> <span class="p">:</span> <span class="n">val</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">SEEDS</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">classification_result</span><span class="p">[</span><span class="n">label</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+    
+<span class="nb">print</span><span class="p">(</span><span class="n">classification_result</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -13339,18 +13351,7 @@ Screaming for Vengeance 0.48271124711117497
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>              precision    recall  f1-score   support
-
-     country       0.90      0.95      0.92        93
-         rap       0.94      0.94      0.94       100
-       metal       0.96      0.95      0.95       100
-        rock       0.81      0.79      0.80        86
-  electronic       0.87      0.85      0.86        99
-
-    accuracy                           0.90       478
-   macro avg       0.89      0.90      0.89       478
-weighted avg       0.90      0.90      0.90       478
-
+<pre>{&#39;accuracy&#39;: 0.8933054393305438, &#39;country&#39;: {&#39;precision&#39;: 0.9032185719209815, &#39;recall&#39;: 0.9419354838709678, &#39;f1-score&#39;: 0.9221109806181046, &#39;support&#39;: 93.0}, &#39;rap&#39;: {&#39;precision&#39;: 0.9368925675372968, &#39;recall&#39;: 0.95, &#39;f1-score&#39;: 0.9433498147005217, &#39;support&#39;: 100.0}, &#39;metal&#39;: {&#39;precision&#39;: 0.9567304625199362, &#39;recall&#39;: 0.9280000000000002, &#39;f1-score&#39;: 0.9420763682357365, &#39;support&#39;: 100.0}, &#39;rock&#39;: {&#39;precision&#39;: 0.7956262128675922, &#39;recall&#39;: 0.7813953488372094, &#39;f1-score&#39;: 0.7879697698581468, &#39;support&#39;: 86.0}, &#39;electronic&#39;: {&#39;precision&#39;: 0.861369096848818, &#39;recall&#39;: 0.8525252525252526, &#39;f1-score&#39;: 0.856766148526261, &#39;support&#39;: 99.0}}
 </pre>
 </div>
 </div>
